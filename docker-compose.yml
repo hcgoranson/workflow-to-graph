@@ -1,0 +1,35 @@
+version: '3'
+services:
+  neo4j:
+    image: 'neo4j:3.5'
+    environment:
+      - NEO4J_AUTH=neo4j/abc
+    ports:
+      - '7474:7474'
+      - '7473:7473'
+      - '7687:7687'
+    volumes:
+      - '$HOME/neo4j/data:/data'
+      - '$HOME/neo4j/conf:/var/lib/neo4j/conf'
+      - '$HOME/neo4j/logs:/logs'
+    networks:
+      - graph-network
+  app:
+    container_name: workflow-to-graph
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8077:8080"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=compose"
+    restart: always
+    depends_on:
+      - neo4j
+    networks:
+      - graph-network
+volumes:
+  neo4j_data:
+    driver: local
+networks:
+  graph-network:

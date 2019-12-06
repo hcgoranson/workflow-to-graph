@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Neo4j graph generator</title>
+    <link rel="stylesheet" href="../css/styles.css"/>
+</head>
+
+<body>
+    <div class="content">
+        <h1>Workflow configuration-to-graph app</h1>
+        <hr/>
+
+        <div>
+            <h4 class="form"> Upload workflow configuration (json):</h4>
+
+            <form method="POST" th:action="@{/uploadFile}" enctype="multipart/form-data" class="image-upload">
+                <input type="file" name="file" class="form button"/> <br/><br/>
+                <button type="submit" class="button">Generate graph</button>
+            </form>
+            <br/>
+            <br/>
+            Go to <a href="http://localhost:7474/browser/" target="_blank">localhost:7474/browser</a> and run <b>match(n) return n</b> <br/>
+            <b>User:</b> neo4j
+            <b>Password:</b> abc
+        </div>
+
+        <hr/>
+
+        <div th:if="${message}">
+            <div th:text="${message}"/>
+        </div>
+
+        <div th:if="${validation}">
+            <b th:if="${validation}">Validation error:</b> <div th:text="${validation}" class="validation" /><br/><br/>
+        </div>
+        <div th:if="${error}">
+            <b th:if="${error}">Error:</b><div th:text="${error}" class="error" />
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Neo4j graph generator</title>
+    <link rel="stylesheet" href="../../css/styles.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Permanent+Marker" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ultra" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
+    <script src="js/dropzone.js"></script>
+</head>
+<body>
+
+<div class="head">Neo4j graph generator</div>
+<hr/>
+
+<div class="zipkin">
+    <div class="note">
+        1. Start the Neo4j server with the below command <br>
+        <pre>
+docker run -d -p 7474:7474 -p 7687:7687 -v $HOME/neo4j/data:/data neo4j:3.4
+        </pre>
+    </div>
+
+    <div class="note" id="pr">
+        2. Drop/open the log file
+    <input type="file"
+           id="avatar" name="avatar"
+           accept="image/png, image/jpeg">
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="file">Choose file to upload</label>
+            <input type="file" id="file" name="file" multiple>
+        </div>
+        <div>
+            <button>Submit</button>
+        </div>
+    </form>
+    </div>
+
+
+    <div class="note" id="graph"></div>
+    <div id="drop-area">
+        <form action="/upload"
+              class="dropzone"
+              id="my-awesome-dropzone">
+        </form>
+    </div>
+
+    <div class="note">
+        3. Open the Neoj4 Server at <a href="http://localhost:7474/browser/" target="_blank">localhost:7474/browser</a>
+    </div>
+
+    <div class="note">
+        4. Run the command <br/>
+        <pre>match(n) return n</pre>
+        in the Neo4j browser
+    </div>
+
+</div>
+
+<hr/>
+<script>
+    function generate(type) {
+        var request = new Request("generate/" + type, {
+            method: 'POST',
+            mode: 'cors',
+            redirect: 'follow',
+            headers: new Headers({
+                'Content-Type': 'text/plain'
+            })
+        });
+
+        fetch(request).then(function(rsp) {
+            console.log(rsp);
+            if (rsp.status === 200) {
+                document.getElementById("graph").innerHTML = "Graph generated";
+            }
+        });
+    }
+</script>
+
+</body>
+
+</html>
