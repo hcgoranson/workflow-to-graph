@@ -2,6 +2,9 @@
 A project to parse a JSON config file and create Cypher statements in order to visualize a workflow
 represented in JSON in a Neo4j graph database 
 
+## Pre-requisite
+**Docker Engine** and **Docker Compose** needs to be installed, instructions can the found here https://docs.docker.com/compose/install/
+
 ## How to use:
 1. git clone the project 
 2. Execute `docker-compose up`, this will create the neo4j database and build and create the app docker image

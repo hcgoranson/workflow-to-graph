@@ -26,9 +26,6 @@ public class ParserService {
     @Autowired
     private Neo4JConnector neo4JConnector;
 
-    @Autowired
-    private ResourceLoader resourceLoader;
-
     public void generateGraph(String configAsString) throws IOException {
 
         log.info("1. Create Java objects from JSON string");
