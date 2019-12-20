@@ -19,6 +19,12 @@
                 <input type="file" name="file" class="form button"/> <br/><br/>
                 <button type="submit" class="button">Generate graph</button>
             </form>
+
+            <h4 class="form"> Upload service dependency (csv):</h4>
+            <form method="POST" th:action="@{/uploadCsvFile}" enctype="multipart/form-data" class="image-upload">
+                <input type="file" name="file" class="form button"/> <br/><br/>
+                <button type="submit" class="button">Generate graph</button>
+            </form>
             <br/>
             <br/>
             Go to <a href="http://localhost:7474/browser/" target="_blank">localhost:7474/browser</a> and run <b>match(n) return n</b> <br/>

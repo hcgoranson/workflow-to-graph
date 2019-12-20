@@ -19,7 +19,7 @@ import static java.util.stream.Collectors.groupingBy;
 
 @Service
 @Slf4j
-public class ParserService {
+public class WorkflowParserService {
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
@@ -31,7 +31,7 @@ public class ParserService {
         log.info("1. Create Java objects from JSON string");
         Elements elements = convertStringToElements(configAsString);
 
-        log.info("2.Create a script for creating the nodes");
+        log.info("2. Create a script for creating the nodes");
         List<String> createScript = createCreateScript(elements);
 
         log.info("3. Create a script for relationships between the nodes");
